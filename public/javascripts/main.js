@@ -19,7 +19,7 @@ define(['jquery'],
         data: { assertion: assertion },
         dataType: 'json',
         cache: false
-      }).done(function(data) {
+      }).done(function (data) {
         if (data.status === 'okay') {
           document.location.href = '/';
         } else {
@@ -37,7 +37,7 @@ define(['jquery'],
       type: 'POST',
       dataType: 'json',
       cache: false
-    }).done(function(data) {
+    }).done(function (data) {
       if (data.status === 'okay') {
         document.location.href = '/';
       } else {
