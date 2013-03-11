@@ -10,8 +10,8 @@
     "client-sessions": ">= 0.0.9",
     "connect": ">= 2.7.3",
     "express": ">= 3.1.0",
-    "jade": ">= 0.28.2",
     "nconf": ">= 0.6.7",
+    "nunjucks": "git://github.com/jlongster/nunjucks.git",
     "express-persona": "git://github.com/jbuck/express-persona.git",
     "webremix": "0.0.5"
   },

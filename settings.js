@@ -29,17 +29,17 @@ module.exports = function(app, configurations, express) {
     app.use(app.router);
     app.use(function(req, res, next) {
       res.status(404);
-      res.render('404', { url: req.url, layout: false });
+      res.render('404.html', { url: req.url, layout: false });
       return;
     });
     app.use(function(req, res, next) {
       res.status(403);
-      res.render('403', { url: req.url, layout: false });
+      res.render('403.html', { url: req.url, layout: false });
       return;
     });
     app.use(function(err, req, res, next) {
       res.status(err.status || 500);
-      res.render('500', { error: err, layout: false });
+      res.render('500.html', { error: err, layout: false });
     });
   });
 
