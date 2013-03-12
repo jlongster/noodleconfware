@@ -13,7 +13,8 @@
     "nconf": ">= 0.6.7",
     "nunjucks": "git://github.com/jlongster/nunjucks.git",
     "express-persona": "git://github.com/jbuck/express-persona.git",
-    "webremix": "0.0.5"
+    "webremix": "0.0.5",
+    "socket.io": "0.9.13"
   },
   "devDependencies": {
     "mocha": ">= 1.8.1",

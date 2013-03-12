@@ -1,0 +1,17 @@
+{% extends 'layout.html' %}
+
+{% block content %}
+  <section class="speakers">
+    <h2>Speakers</h2>
+    <ul>
+      <li>Speaker 1</li>
+      <li>Speaker 2</li>
+      <li>Speaker 3</li>
+    </ul>
+  </section>
+  {% if session.speaker %}
+    <input type="text" name="link" placeholder="Enter text here">
+  {% endif %}
+  <section class="media">
+  </section>
+{% endblock %}

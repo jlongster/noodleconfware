@@ -6,15 +6,47 @@ var nconf = require('nconf');
 var settings = require('./settings')(app, configurations, express);
 var nunjucks = require('nunjucks');
 var env = new nunjucks.Environment(new nunjucks.FileSystemLoader('views'));
+var io = require('socket.io');
+var speakers = require('./speakers');
 
 env.express(app);
 
 nconf.argv().env().file({ file: 'local.json' });
 
+/* Websocket setup */
+
+var io = require('socket.io').listen(app);
+
+io.configure(function() {
+  io.set('log level', 1);
+});
+
+io.sockets.on('connection', function(socket) {
+  socket.on('join channel', function(channel) {
+    socket.join(channel);
+  });
+});
+
 /* Filters for routes */
 
-var isLoggedIn = function(req, res, next) {
+var isLoggedIn = function (req, res, next) {
   if (req.session.email) {
+    next();
+  } else {
+    res.redirect('/');
+  }
+};
+
+var setSpeaker = function (req, res, next) {
+  req.session.speaker = false;
+  if (req.session.email && speakers.indexOf(req.session.email.toLowerCase()) === 0) {
+    req.session.speaker = true;
+  }
+  next();
+};
+
+var isSpeaker = function (req, res, next) {
+  if (req.session.speaker) {
     next();
   } else {
     res.redirect('/');
@@ -26,7 +58,7 @@ require('express-persona')(app, {
 });
 
 // routes
-require("./routes")(app, isLoggedIn);
+require("./routes")(app, setSpeaker, isSpeaker, isLoggedIn);
 
 app.get('/404', function(req, res, next){
   next();
