@@ -7,9 +7,8 @@ module.exports = function(app, configurations, express) {
 
   // Configuration
 
-  app.configure(function(){
+  app.configure(function() {
     app.set('views', __dirname + '/views');
-    app.set('view engine', 'jade');
     app.set('view options', { layout: false });
     app.use(express.bodyParser());
     app.use(express.methodOverride());
@@ -30,6 +29,7 @@ module.exports = function(app, configurations, express) {
       res.locals.session = req.session;
       next();
     });
+    app.locals.pretty = true;
     app.use(app.router);
     app.use(function(req, res, next) {
       res.status(404);

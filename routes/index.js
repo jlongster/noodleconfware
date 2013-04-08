@@ -11,6 +11,12 @@ module.exports = function (app, setSpeaker, isSpeaker, isLoggedIn) {
     });
   });
 
+  app.get('/not_authorized', function (req, res) {
+    res.render('not_authorized.html',  {
+      pageType: 'not_authorized'
+    });
+  });
+
   app.get('/dashboard', setSpeaker, isLoggedIn, function (req, res) {
     res.render('dashboard.html', {
       pageType: 'dashboard'

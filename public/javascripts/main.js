@@ -5,17 +5,6 @@ define(['jquery'],
 
   var body = $('body');
 
-  var socket = io.connect(location.protocol + '//' + location.hostname +
-    (location.port ? ':' + location.port : ''));
-
-  socket.on('connect', function () {
-    socket.on('message', function (data) {
-      addMessage(data);
-    });
-
-    socket.emit('join channel', 'noodleconf');
-  });
-
   var addMessage = function (data) {
     var message = $.trim(data.message);
 
