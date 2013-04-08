@@ -13,23 +13,10 @@ env.express(app);
 
 nconf.argv().env().file({ file: 'local.json' });
 
-/* Websocket setup */
-var io = require('socket.io').listen(server);
-
-io.configure(function() {
-  io.set('log level', 1);
-});
-
-io.sockets.on('connection', function(socket) {
-  socket.on('join channel', function(channel) {
-    socket.join(channel);
-  });
-});
-
 /* Filters for routes */
 var isLoggedIn = function (req, res, next) {
   var email = req.session.email.toLowerCase();
-  if (req.session.email && (audience.indexOf(email) === 0 || speakers.indexOf(email) === 0))  {
+  if (req.session.email && (audience.indexOf(email) > -1 || speakers.indexOf(email) > -1))  {
     next();
   } else {
     res.redirect('/not_authorized');
@@ -38,7 +25,7 @@ var isLoggedIn = function (req, res, next) {
 
 var setSpeaker = function (req, res, next) {
   req.session.speaker = false;
-  if (req.session.email && speakers.indexOf(req.session.email.toLowerCase()) === 0) {
+  if (req.session.email && speakers.indexOf(req.session.email.toLowerCase()) > -1) {
     req.session.speaker = true;
   }
   next();
