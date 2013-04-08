@@ -385,7 +385,7 @@ rtc.on('ready', function() {
 rtc.createStream(
     { 'video': true, 'audio': true },
     function(stream) {
-        var video = document.getElementById('video-stream');
+        var video = document.getElementById('stream1');
         if(video.mozSrcObject) {
             video.mozSrcObject = stream;
         }
@@ -398,10 +398,10 @@ rtc.createStream(
 
 rtc.on('add remote stream', function(stream, socketId) {
     console.log('ADDING REMOTE');
-    rtc.attachStream(stream, 'other-stream');
+    rtc.attachStream(stream, 'stream2');
 
     // TODO: do we need this?
-    var video = document.getElementById('other-stream');
+    var video = document.getElementById('stream2');
     video.play();
 });
 
