@@ -8,6 +8,7 @@ var nunjucks = require('nunjucks');
 var env = new nunjucks.Environment(new nunjucks.FileSystemLoader('views'));
 var speakers = require('./speakers');
 var audience = require('./audience');
+var rtc = require('./webrtc');
 
 env.express(app);
 
@@ -59,5 +60,11 @@ app.get('/403', function(req, res, next){
 app.get('/500', function(req, res, next){
   next(new Error('something went wrong!'));
 });
+
+// webrtc
+
+rtc.listen(app);
+
+// main
 
 app.listen(process.env.PORT || nconf.get('port'));

@@ -4,9 +4,9 @@
   <section class="speakers">
     <h2>Speakers</h2>
     <ul>
-      <li>Speaker 1</li>
-      <li>Speaker 2</li>
-      <li>Speaker 3</li>
+      <li><video id="stream1"></video></li>
+      <li><video id="stream2"></video></li>
+      <li><video id="stream3"></video></li>
     </ul>
   </section>
   {% if session.speaker %}
@@ -14,4 +14,6 @@
   {% endif %}
   <section class="media">
   </section>
+
+  <script src="/javascripts/webrtc.js"></script>
 {% endblock %}
